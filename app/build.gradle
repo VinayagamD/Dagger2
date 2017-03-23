@@ -1,0 +1,93 @@
+apply plugin: 'com.android.application'
+apply plugin: 'android-apt'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
+    defaultConfig {
+        applicationId "com.ffghub.dagger2"
+        minSdkVersion 15
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+    }
+    packagingOptions {
+        exclude "META-INF/DEPENDENCIES.txt"
+        exclude "META-INF/NOTICE"
+        exclude "META-INF/NOTICE.txt"
+        exclude "META-INF/LICENSE"
+        exclude "META-INF/LICENSE.txt"
+        exclude "META-INF/rxjava.properties"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+ext {
+    powerMockVersion = "1.7.0RC2"
+    daggerVersion = "2.10-rc2"
+    butterKnifeVersion = "8.5.1"
+    retrofitVersion = "2.2.0"
+    okHttpVersion = "3.6.0"
+    rxVersion = "2.0.1"
+    supportLibraryVersion = "25.3.0"
+}
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.jakewharton.picasso:picasso2-okhttp3-downloader:1.1.0'
+    compile "com.android.support:appcompat-v7:$supportLibraryVersion"
+    //Injection
+    compile "com.google.dagger:dagger:$daggerVersion"
+    apt "com.google.dagger:dagger-compiler:$daggerVersion"
+    //ButterKnife
+    compile "com.jakewharton:butterknife:$butterKnifeVersion"
+    apt "com.jakewharton:butterknife-compiler:$butterKnifeVersion"
+    /*Rest Interaction*/
+
+    // https://mvnrepository.com/artifact/com.squareup.retrofit2/retrofit
+    compile "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    /*Json Parsing*/
+
+    // https://mvnrepository.com/artifact/com.squareup.retrofit2/converter-gson
+    compile "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+    // https://mvnrepository.com/artifact/com.google.code.gson/gson
+    /*http logging*/
+
+    // https://mvnrepository.com/artifact/com.squareup.okhttp3/logging-interceptor
+    compile "com.squareup.okhttp3:logging-interceptor:$okHttpVersion"
+    compile "com.squareup.okhttp3:okhttp:$okHttpVersion"
+    /*RXJava Setup*/
+
+    // https://mvnrepository.com/artifact/io.reactivex/rxjava
+    compile "io.reactivex.rxjava2:rxandroid:$rxVersion"
+    // https://mvnrepository.com/artifact/io.reactivex/rxandroid
+    compile "io.reactivex.rxjava2:rxjava:$rxVersion"
+    // https://mvnrepository.com/artifact/com.squareup.retrofit2/adapter-rxjava
+    compile "com.squareup.retrofit2:adapter-rxjava:$retrofitVersion"
+    compile "com.android.support:design:$supportLibraryVersion"
+    compile "com.android.support:cardview-v7:$supportLibraryVersion"
+    compile "com.android.support:recyclerview-v7:$supportLibraryVersion"
+    compile 'com.android.support.constraint:constraint-layout:1.0.1'
+    compile 'com.android.support:multidex:1.0.1'
+    compile 'javax.annotation:jsr250-api:1.0'
+    compile 'com.google.code.gson:gson:2.8.0'
+    compile 'com.intuit.sdp:sdp-android:1.0.4'
+    compile 'com.intuit.ssp:ssp-android:1.0.4'
+    testCompile 'junit:junit:4.12'
+    // https://mvnrepository.com/artifact/joda-time/joda-time
+    compile group: 'joda-time', name: 'joda-time', version: '2.9.7'
+    // https://mvnrepository.com/artifact/com.jakewharton.timber/timber
+    compile group: 'com.jakewharton.timber', name: 'timber', version: '4.5.1'
+
+
+}
